@@ -122,7 +122,6 @@ def isTouchingItself():
     # for i in range(len(segments)-1, 1, -1):
     for segment in segments:
         if (segment.xcor() == head.xcor()) and (segment.ycor() == head.ycor()):
-            print("equal to head")
             continue
         # current_segment = segments[i]
         # if(head.xcor() == current_segment.xcor() and head.ycor() == current_segment.ycor()):
