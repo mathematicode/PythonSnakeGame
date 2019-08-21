@@ -138,15 +138,15 @@ def repositionFood():
 
 win.delay_count=0
 
-# def changeSpeed():
-#     win.delay_count = win.delay_count + 1
-#     delay_factor = 1.4 * win.delay_count
-#     # Make snake go from slow to fast
-#     if win.delay > 0.15:
-#         win.delay = win.delay / delay_factor
-#     # Make snake go from fast to slow
-#     else:
-#         win.delay = win.delay * delay_factor
+def changeSpeed():
+    win.delay_count = win.delay_count + 1
+    delay_factor = 1.4 * win.delay_count
+    # Make snake go from slow to fast
+    if win.delay > 0.15:
+        win.delay = win.delay / delay_factor
+    # Make snake go from fast to slow
+    else:
+        win.delay = win.delay * delay_factor
 
 def incrementScore():
     win.score = win.score + 1
@@ -176,7 +176,7 @@ while isTouchingItself() != 0:
     if (head.xcor() == food.xcor()) and (head.ycor() == food.ycor()):
         grow()
         repositionFood()
-        # changeSpeed()
+        changeSpeed()
         incrementScore()
 
     write_turtle.clear()
