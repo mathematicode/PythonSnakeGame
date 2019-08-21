@@ -6,7 +6,7 @@ import random
 
 # Set up screen
 win = turtle.Screen()
-win.title("Wormy Game")
+win.title("Snake Game")
 win.bgcolor("green")
 win.setup(width=500, height=500)
 win.tracer(0) # Turns off screen updates
