@@ -44,7 +44,7 @@ head.direction = "stop"
 # NOTE: Delay doesn't work well it's a small value
 win.delay=0.1
 
-# Create empty list of segments
+# Create list of segments
 segments = [head]
 
 # Create food
@@ -119,16 +119,11 @@ def grow():
 # Determines if snake head is touching another segment. Returns 0 for false, 1 for true
 def isTouchingItself():
     # Stop at 1 as we don't want to iterate over the head. The head touching itself should be allowed!
-    # for i in range(len(segments)-1, 1, -1):
-    for segment in segments:
-        if (segment.xcor() == head.xcor()) and (segment.ycor() == head.ycor()):
-            continue
-        # current_segment = segments[i]
-        # if(head.xcor() == current_segment.xcor() and head.ycor() == current_segment.ycor()):
-        if head.distance(segment) < 20:
-            return 0
-        else:
+    for i in range(len(segments)-1, 1, -1):
+        current_segment = segments[i]
+        if (current_segment.xcor() == head.xcor()) and (current_segment.ycor() == head.ycor()):
             return 1
+    return 0
 
 # Shift food to a random position on the screen
 def repositionFood():
@@ -137,16 +132,6 @@ def repositionFood():
     food.goto(rand.randint(0, (width_dim - 10)/20) * 20, rand.randint(0, (heigh_dim - 10)/20) * 20)
 
 win.delay_count=0
-
-# def changeSpeed():
-#     win.delay_count = win.delay_count + 1
-#     delay_factor = 1.4 * win.delay_count
-#     # Make snake go from slow to fast
-#     if win.delay > 0.15:
-#         win.delay = win.delay / delay_factor
-#     # Make snake go from fast to slow
-#     else:
-#         win.delay = win.delay * delay_factor
 
 def incrementScore():
     win.score = win.score + 1
@@ -159,24 +144,19 @@ win.onkeypress(go_left, "a")
 win.onkeypress(go_right, "d")
 
 # Main loop
-while isTouchingItself() != 0:
+while isTouchingItself() != 1:
     # Make sure to call move before doing the delay. This makes the game much smoother asn easier
     # to code
 
     move()
 
-    if isTouchingItself() == 0:
-        # write_turtle.goto(0, 50)
-        # write_turtle.pencolor("black")
-        # write_turtle.write("GAME OVER :p", align="center", font=("Arial", 20, "normal"))
-        # write_turtle.hideturtle()
+    if isTouchingItself() == 1:
         break
 
     # Check if the head is touching the food
     if (head.xcor() == food.xcor()) and (head.ycor() == food.ycor()):
         grow()
         repositionFood()
-        # changeSpeed()
         incrementScore()
 
     write_turtle.clear()
